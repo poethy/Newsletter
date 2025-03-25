@@ -1,0 +1,15 @@
+# Archivos sensibles
+.env
+*.db
+instance/
+
+# Entorno virtual
+venv/
+env/
+
+# Archivos de Python
+__pycache__/
+*.pyc
+
+# Otros
+.DS_Store
