@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Panel de Administración - Sistema de Newsletter{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="mb-4">Panel de Administración</h2>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Suscriptores Activos</h5>
+                <p class="card-text display-4">{{ subscribers }}</p>
+                <a href="{{ url_for('admin.list_subscribers') }}" class="btn btn-primary">Ver Suscriptores</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Newsletters Enviados</h5>
+                <p class="card-text display-4">{{ newsletters|selectattr('status', 'equalto', 'sent')|list|length }}</p>
+                <a href="{{ url_for('admin.new_newsletter') }}" class="btn btn-primary">Crear Newsletter</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Últimos Newsletters</h5>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Asunto</th>
+                                <th>Fecha de Creación</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for newsletter in newsletters %}
+                            <tr>
+                                <td>{{ newsletter.subject }}</td>
+                                <td>{{ newsletter.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+                                <td>
+                                    <span class="badge bg-{{ 'success' if newsletter.status == 'sent' else 'warning' }}">
+                                        {{ newsletter.status }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% if newsletter.status != 'sent' %}
+                                    <a href="{{ url_for('admin.send_newsletter', id=newsletter.id) }}" 
+                                       class="btn btn-sm btn-success">
+                                        Enviar
+                                    </a>
+                                    {% endif %}
+                                    <form action="{{ url_for('admin.delete_newsletter', id=newsletter.id) }}" 
+                                          method="POST" 
+                                          style="display: inline;"
+                                          onsubmit="return confirm('¿Estás seguro de que deseas eliminar este newsletter?')">
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            Eliminar
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
