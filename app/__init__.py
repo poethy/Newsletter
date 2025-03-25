@@ -18,7 +18,12 @@ def create_app():
     
     # Configuración básica
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev')
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///newsletter.db')
+    
+    # Configuración de la base de datos para Vercel
+    database_url = os.getenv('DATABASE_URL')
+    if database_url and database_url.startswith('postgres://'):
+        database_url = database_url.replace('postgres://', 'postgresql://', 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url or 'sqlite:///newsletter.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
     # Configuración de email
@@ -44,4 +49,7 @@ def create_app():
     with app.app_context():
         db.create_all()
     
-    return app 
+    return app
+
+# Para Vercel
+app = create_app() 
