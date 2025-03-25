@@ -61,4 +61,5 @@ def internal_error(error):
 
 # Función principal para Vercel
 def handler(request):
-    return app(request) 
+    with app.app_context():
+        return app.handle_request(request) 
