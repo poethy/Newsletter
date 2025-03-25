@@ -11,6 +11,5 @@
             "src": "/(.*)",
             "dest": "app/__init__.py"
         }
-    ],
-    "framework": "flask"
+    ]
 } 
