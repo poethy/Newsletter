@@ -59,7 +59,11 @@ app = create_app()
 def internal_error(error):
     return "Error interno del servidor", 500
 
+@app.errorhandler(404)
+def not_found_error(error):
+    return "Página no encontrada", 404
+
 # Función principal para Vercel
 def handler(request):
     with app.app_context():
-        return app.handle_request(request) 
+        return app(request) 
