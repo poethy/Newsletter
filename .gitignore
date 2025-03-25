@@ -6,10 +6,50 @@ instance/
 # Entorno virtual
 venv/
 env/
+.venv/
+ENV/
 
 # Archivos de Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# Otros
+# Logs y bases de datos
+*.log
+*.sqlite
+*.db
+*.sql
+
+# Archivos del sistema
 .DS_Store
+Thumbs.db
+.directory
+
+# IDEs y editores
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*.bak
+
+# Archivos de configuración y secretos
+config.py
+secrets.json
