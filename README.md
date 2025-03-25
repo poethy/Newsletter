@@ -56,19 +56,3 @@ Un sistema de newsletter desarrollado con Flask que permite gestionar suscripcio
 ```bash
 flask run
 ```
-
-## Estructura del Proyecto
-
-```
-newsletter/
-├── app/
-│   ├── __init__.py
-│   ├── models.py
-│   ├── routes.py
-│   └── templates/
-├── instance/
-├── venv/
-├── .env
-├── requirements.txt
-└── README.md
-``` 
