@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 from flask_login import LoginManager
@@ -52,4 +52,13 @@ def create_app():
     return app
 
 # Para Vercel
-app = create_app() 
+app = create_app()
+
+# Manejador de errores para Vercel
+@app.errorhandler(500)
+def internal_error(error):
+    return "Error interno del servidor", 500
+
+# Función principal para Vercel
+def handler(request):
+    return app(request) 
