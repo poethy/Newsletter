@@ -1,24 +1,8 @@
 {
-    "version": 2,
-    "builds": [
+    "rewrites": [
         {
-            "src": "app/__init__.py",
-            "use": "@vercel/python"
+            "source": "/(.*)",
+            "destination": "/app/templates/index.html"
         }
-    ],
-    "routes": [
-        {
-            "src": "/static/(.*)",
-            "dest": "app/__init__.py:handler"
-        },
-        {
-            "src": "/favicon.ico",
-            "dest": "app/__init__.py:handler"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "app/__init__.py:handler"
-        }
-    ],
-    "buildCommand": "bash build.sh"
+    ]
 }
