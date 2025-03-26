@@ -8,6 +8,14 @@
     ],
     "routes": [
         {
+            "src": "/static/(.*)",
+            "dest": "app/__init__.py:handler"
+        },
+        {
+            "src": "/favicon.ico",
+            "dest": "app/__init__.py:handler"
+        },
+        {
             "src": "/(.*)",
             "dest": "app/__init__.py:handler"
         }
